@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liliana Pantoja Tinajero · Portfolio</title>
+<meta name="description" content="Computer Science student focused on AI and cybersecurity. Project Lead of Biometric Ghost-Gate at AQ Tech, game developer and C++ programmer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d12; --panel:#12161e; --panel-2:#171c26; --line:#232a37;
+    --text:#e7eaf0; --muted:#9aa3b2; --accent:#3ddc97; --accent-2:#f2994a; --link:#7cc4ff;
+    --radius:14px; --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Space Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  /* language toggle */
+  body.es [data-lang="en"], body:not(.es) [data-lang="es"]{display:none !important}
+
+  header.nav{position:sticky;top:0;z-index:10;background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .brand{font-weight:700;letter-spacing:.2px;color:var(--text)}
+  .brand span{color:var(--accent)}
+  nav.links{display:flex;gap:22px;font-size:14px}
+  nav.links a{color:var(--muted)} nav.links a:hover{color:var(--text);text-decoration:none}
+  .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:12px}
+  .lang button{background:none;border:0;color:var(--muted);padding:6px 11px;cursor:pointer;font:inherit}
+  .lang button.on{background:var(--accent);color:#06140e;font-weight:700}
+
+  .hero{padding:96px 0 72px;border-bottom:1px solid var(--line);
+    background:radial-gradient(800px 360px at 85% 10%,rgba(61,220,151,.10),transparent 60%),
+               radial-gradient(600px 300px at 0% 100%,rgba(242,153,74,.08),transparent 60%)}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin:14px 0 18px;letter-spacing:-.02em}
+  .lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:680px;margin:0 0 30px}
+  .lede b{color:var(--text);font-weight:500}
+  .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;border:1px solid var(--line);color:var(--text);font-weight:500;font-size:15px}
+  .btn:hover{text-decoration:none;border-color:var(--muted)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#06140e}
+  .btn.primary:hover{filter:brightness(1.08)}
+
+  section{padding:80px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:34px}
+  .sec-head .num{color:var(--accent);font-size:14px}
+  h2{font-size:30px;margin:0;letter-spacing:-.01em}
+
+  .about{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+  .about p{color:var(--muted);margin:0 0 14px} .about p b{color:var(--text);font-weight:500}
+  .facts{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;font-size:14px}
+  .facts div{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .facts div:last-child{border:0}
+  .facts span:first-child{color:var(--muted)} .facts span:last-child{text-align:right}
+
+  /* projects */
+  .feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:26px}
+  .feature .body{padding:30px}
+  .feature .media{background:#07090d;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:280px}
+  .tag{display:inline-block;font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:0 6px 6px 0}
+  .tag.hot{border-color:rgba(61,220,151,.4);color:var(--accent)}
+  .tag.warm{border-color:rgba(242,153,74,.45);color:var(--accent-2)}
+  h3{font-size:24px;margin:10px 0 6px}
+  .role{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .feature p{color:#c9cfda;margin:0 0 14px}
+  ul.points{margin:0 0 18px;padding-left:18px;color:#c9cfda} ul.points li{margin:4px 0}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 20px}
+  .stack span{font-size:12px;background:var(--panel-2);border:1px solid var(--line);padding:4px 8px;border-radius:6px}
+  .links-row{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;font-weight:500}
+
+  /* BGG diagram */
+  .flow{width:100%;padding:28px;font-size:12px}
+  .flow .node{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 auto;max-width:300px;text-align:center}
+  .flow .node b{display:block;font-size:13px;color:var(--text)}
+  .flow .node small{color:var(--muted)}
+  .flow .node.core{border-color:rgba(61,220,151,.5);box-shadow:0 0 0 4px rgba(61,220,151,.06)}
+  .flow .node.next{border-style:dashed;opacity:.8}
+  .flow .arrow{text-align:center;color:var(--accent);line-height:1;margin:6px 0}
+  .flow .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:300px;margin:0 auto}
+  .flow .row .node{max-width:none}
+
+  .wcb-media{display:block;width:100%}
+  .wcb-media img{display:block;width:100%;height:auto;image-rendering:pixelated}
+  .wcb-shots{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#000}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .card .thumb{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:220px;gap:2px;background:#000;height:220px;overflow:hidden}
+  .card .thumb img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;object-position:top}
+  .card .thumb .stackimg{display:grid;grid-template-rows:109px 109px;gap:2px;min-height:0;overflow:hidden}
+  .card .body{padding:24px;flex:1}
+  .card p{color:#c9cfda;margin:0 0 14px}
+  .card .links-row{margin-top:auto}
+  .term{background:#07090d;height:220px;padding:20px;font-size:12.5px;color:#b7f5d9;overflow:hidden;border-bottom:1px solid var(--line)}
+  .term .dim{color:#5c6677}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .skill{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .skill h4{margin:0 0 12px;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+  .skill ul{list-style:none;margin:0;padding:0;font-size:14.5px} .skill li{padding:3px 0}
+
+  /* timeline */
+  .timeline{border-left:2px solid var(--line);margin-left:6px}
+  .t-item{position:relative;padding:0 0 28px 26px}
+  .t-item::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .t-item .when{font-size:13px;color:var(--muted)}
+  .t-item h4{margin:2px 0 4px;font-size:18px}
+  .t-item p{margin:0;color:#c9cfda;font-size:15px}
+
+  .contact{text-align:center;padding:96px 0}
+  .contact h2{font-size:clamp(28px,4vw,42px);margin-bottom:12px}
+  .contact p{color:var(--muted);max-width:560px;margin:0 auto 28px}
+  .contact .cta{justify-content:center}
+  footer{padding:28px 0;color:var(--muted);font-size:13px;text-align:center}
+
+  @media (max-width:860px){
+    nav.links{display:none}
+    .about,.feature,.grid{grid-template-columns:1fr}
+    .feature .media{border-left:0;border-top:1px solid var(--line)}
+    .skills{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:520px){ .skills{grid-template-columns:1fr} .hero{padding:64px 0 52px} section{padding:60px 0} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">Liliana<span>.</span>PT</a>
+    <nav class="links">
+      <a href="#about"><span data-lang="en">About</span><span data-lang="es">Sobre mí</span></a>
+      <a href="#projects"><span data-lang="en">Projects</span><span data-lang="es">Proyectos</span></a>
+      <a href="#skills"><span data-lang="en">Skills</span><span data-lang="es">Habilidades</span></a>
+      <a href="#journey"><span data-lang="en">Journey</span><span data-lang="es">Trayectoria</span></a>
+      <a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="btn-en" class="on" onclick="setLang('en')">EN</button>
+      <button id="btn-es" onclick="setLang('es')">ES</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div class="kicker mono">
+        <span data-lang="en">// AI · Cybersecurity · Game Dev</span>
+        <span data-lang="es">// IA · Ciberseguridad · Videojuegos</span>
+      </div>
+      <h1>Liliana Pantoja Tinajero</h1>
+      <p class="lede" data-lang="en">
+        Computer Science student building <b>AI-powered security infrastructure</b>. Project Lead of
+        <b>Biometric Ghost-Gate</b> at AQ Tech, C++ programmer, and indie game developer who learns by shipping.
+      </p>
+      <p class="lede" data-lang="es">
+        Estudiante de Ciencias de la Computación construyendo <b>infraestructura de seguridad impulsada por IA</b>.
+        Project Lead de <b>Biometric Ghost-Gate</b> en AQ Tech, programadora en C++ y desarrolladora de videojuegos que aprende construyendo.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="#projects"><span data-lang="en">See my work</span><span data-lang="es">Ver mis proyectos</span> →</a>
+        <a class="btn" href="https://github.com/LilianaPT" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/liliana-pantoja" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="num mono">01</span><h2><span data-lang="en">About</span><span data-lang="es">Sobre mí</span></h2></div>
+      <div class="about">
+        <div data-lang="en">
+          <p>I'm a <b>first-generation college student</b> at Elgin Community College, pursuing an Associate in Science and preparing to transfer into a <b>Computer Science</b> program focused on <b>AI and Cybersecurity</b>.</p>
+          <p>My goal is to work in IT and AI research, building security systems that protect people's most sensitive data. At AQ Tech I lead a five-person team designing <b>Biometric Ghost-Gate</b>, a security layer for banks and fintechs that combines hidden infrastructure, behavioral bot detection, and irreversible hashing of biometric data.</p>
+          <p>Outside of security, I make games. Game jams push me to design, code, and ship something complete under pressure — and they're where a lot of my problem-solving gets sharper.</p>
+        </div>
+        <div data-lang="es">
+          <p>Soy <b>estudiante universitaria de primera generación</b> en Elgin Community College, cursando un Associate in Science y preparándome para transferirme a un programa de <b>Ciencias de la Computación</b> enfocado en <b>IA y Ciberseguridad</b>.</p>
+          <p>Mi meta es trabajar en TI e investigación en IA, construyendo sistemas de seguridad que protejan los datos más sensibles de las personas. En AQ Tech lidero un equipo de cinco personas que diseña <b>Biometric Ghost-Gate</b>, una capa de seguridad para bancos y fintechs que combina infraestructura oculta, detección de bots por comportamiento y hashing irreversible de datos biométricos.</p>
+          <p>Fuera de la seguridad, hago videojuegos. Las game jams me obligan a diseñar, programar y entregar algo completo bajo presión — y ahí es donde más se afila mi forma de resolver problemas.</p>
+        </div>
+        <div class="facts mono">
+          <div><span data-lang="en">Studying</span><span data-lang="es">Estudios</span><span>A.S. · Elgin Community College</span></div>
+          <div><span data-lang="en">Focus</span><span data-lang="es">Enfoque</span><span data-lang="en">AI · Cybersecurity</span><span data-lang="es">IA · Ciberseguridad</span></div>
+          <div><span data-lang="en">Role</span><span data-lang="es">Rol</span><span>Project Lead · AQ Tech</span></div>
+          <div><span data-lang="en">Honors</span><span data-lang="es">Distinciones</span><span>Phi Theta Kappa</span></div>
+          <div><span data-lang="en">Languages</span><span data-lang="es">Idiomas</span><span data-lang="en">English · Spanish</span><span data-lang="es">Inglés · Español</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><span class="num mono">02</span><h2><span data-lang="en">Projects</span><span data-lang="es">Proyectos</span></h2></div>
+
+      <!-- BGG -->
+      <article class="feature">
+        <div class="body">
+          <span class="tag hot">Cybersecurity · AI</span><span class="tag" data-lang="en">Team project · Lead</span><span class="tag" data-lang="es">Proyecto en equipo · Líder</span>
+          <h3>Biometric Ghost-Gate (BGG)</h3>
+          <div class="role" data-lang="en">Project Lead &amp; Lead Developer · AQ Tech</div>
+          <div class="role" data-lang="es">Project Lead y Lead Developer · AQ Tech</div>
+          <p data-lang="en">A cybersecurity sandbox for banking and fintech: a working bank simulator (login + transfers) that captures human and bot behavior in real time and sends it to an anomaly-detection model to flag automated attacks.</p>
+          <p data-lang="es">Un sandbox de ciberseguridad para banca y fintech: un simulador bancario funcional (login + transferencias) que captura comportamiento humano y de bots en tiempo real y lo envía a un modelo de detección de anomalías para identificar ataques automatizados.</p>
+          <ul class="points" data-lang="en">
+            <li>Designed and built the FastAPI backend, containerized with Docker on a Linux VM</li>
+            <li>Web front end with real-time behavioral capture and human/bot labels per event</li>
+            <li>Connected live to the team's Isolation Forest model; bot alerts pushed to admins</li>
+            <li>Coordinate a 5-person team across kernel/networking, AI, marketing, and legal</li>
+          </ul>
+          <ul class="points" data-lang="es">
+            <li>Diseñé y construí el backend en FastAPI, contenerizado con Docker en una VM Linux</li>
+            <li>Frontend web con captura de comportamiento en tiempo real y etiqueta humano/bot por evento</li>
+            <li>Conectado en vivo al modelo Isolation Forest del equipo; alertas de bots enviadas a administradores</li>
+            <li>Coordino un equipo de 5 personas: kernel/redes, IA, marketing y legal</li>
+          </ul>
+          <div class="stack mono"><span>Python</span><span>FastAPI</span><span>Docker</span><span>Linux</span><span>REST APIs</span><span>Isolation Forest</span><span>HTML/JS</span></div>
+          <div class="links-row">
+            <a href="https://github.com/LilianaPT/Biometric-Ghost-Gate" target="_blank" rel="noopener"><span data-lang="en">View code</span><span data-lang="es">Ver código</span> ↗</a>
+          </div>
+        </div>
+        <div class="media">
+          <div class="flow mono" aria-hidden="true">
+            <div class="node"><b data-lang="en">User or bot</b><b data-lang="es">Usuario o bot</b><small>login · transfer</small></div>
+            <div class="arrow">↓</div>
+            <div class="node core"><b data-lang="en">BGG bank simulator</b><b data-lang="es">Simulador bancario BGG</b><small>FastAPI · Docker · behavior capture</small></div>
+            <div class="arrow">↓</div>
+            <div class="row">
+              <div class="node"><b>AI API</b><small>Isolation Forest</small></div>
+              <div class="node"><b data-lang="en">Alerts</b><b data-lang="es">Alertas</b><small data-lang="en">human vs bot</small><small data-lang="es">humano vs bot</small></div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="node next"><b data-lang="en">Next: kernel defense</b><b data-lang="es">Siguiente: defensa en kernel</b><small>eBPF / XDP</small></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- What Comes Back -->
+      <article class="feature">
+        <div class="body">
+          <span class="tag warm">Game Dev</span><span class="tag">Spooky 2D Jam 2026</span>
+          <h3>What Comes Back Isn't the Same</h3>
+          <div class="role" data-lang="en">Designer &amp; Programmer · built in 48 hours</div>
+          <div class="role" data-lang="es">Diseñadora y programadora · hecho en 48 horas</div>
+          <p data-lang="en">A 2D pixel-art puzzle platformer about necromancy: every time you bring your little sister back, a little less of her returns. My first finished game, made for my first game jam.</p>
+          <p data-lang="es">Un platformer de puzles en pixel art sobre necromancia: cada vez que traes de vuelta a tu hermana, regresa un poco menos de ella. Mi primer juego terminado, hecho para mi primera game jam.</p>
+          <ul class="points" data-lang="en">
+            <li>Game concept, story, level and puzzle design</li>
+            <li>Built the game in Unity: scenes, animation, UI and scene flow in C#</li>
+            <li>Testing, debugging and WebGL deployment to itch.io</li>
+          </ul>
+          <ul class="points" data-lang="es">
+            <li>Concepto, historia, diseño de niveles y puzles</li>
+            <li>Construí el juego en Unity: escenas, animación, UI y flujo de escenas en C#</li>
+            <li>Pruebas, depuración y publicación WebGL en itch.io</li>
+          </ul>
+          <div class="stack mono"><span>Unity 6</span><span>C#</span><span>2D Tilemaps</span><span>URP 2D Lights</span><span>WebGL</span></div>
+          <div class="links-row">
+            <a href="https://katsuna96.itch.io/what-comes-back" target="_blank" rel="noopener"><span data-lang="en">Play in browser</span><span data-lang="es">Jugar en el navegador</span> ↗</a>
+            <a href="https://github.com/LilianaPT/What-Comes-Back" target="_blank" rel="noopener"><span data-lang="en">View code</span><span data-lang="es">Ver código</span> ↗</a>
+          </div>
+        </div>
+        <div class="media">
+          <div class="wcb-media">
+            <img src="assets/wcb-banner.png" alt="What Comes Back Isn't the Same title banner: a pixel-art cemetery at sunset">
+            <div class="wcb-shots">
+              <img src="assets/wcb-1.png" alt="Cemetery level screenshot">
+              <img src="assets/wcb-2.png" alt="Forest level screenshot">
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid">
+        <!-- Arcade -->
+        <article class="card">
+          <div class="thumb">
+            <img src="assets/car_racing.png" alt="Car Racing game running in the console">
+            <div class="stackimg">
+              <img src="assets/snake.png" alt="Snake game in the console">
+              <img src="assets/tictactoe.png" alt="Tic Tac Toe in the console">
+            </div>
+          </div>
+          <div class="body">
+            <span class="tag hot">C++ · OOP</span><span class="tag">CIS-121 Final Project</span>
+            <h3>Arcade Multi-Game Suite</h3>
+            <p data-lang="en">A C++ console app with three arcade games — Car Racing, Snake and Tic Tac Toe — in one hub. Uses string-buffer rendering to eliminate terminal flicker, and difficulty that scales with your live score.</p>
+            <p data-lang="es">Una aplicación de consola en C++ con tres juegos arcade — Car Racing, Snake y Tic Tac Toe — en un solo menú. Usa renderizado con buffer de texto para eliminar el parpadeo y dificultad que escala con el puntaje.</p>
+            <div class="stack mono"><span>C++</span><span>OOP</span><span>STL</span><span>Real-time input</span></div>
+            <div class="links-row"><a href="https://github.com/LilianaPT/Arcade-MultiGame-Suite" target="_blank" rel="noopener"><span data-lang="en">View code</span><span data-lang="es">Ver código</span> ↗</a></div>
+          </div>
+        </article>
+
+        <!-- Coursework -->
+        <article class="card">
+          <div class="term mono" aria-hidden="true">
+            <div class="dim">$ tree CIS-Coursework -L 1</div>
+            <div>├── CIS-121 · Intro to C++</div>
+            <div class="dim">│   ├── CoffeeShop_Simulator</div>
+            <div class="dim">│   ├── Fitness_Progress_Tracker</div>
+            <div class="dim">│   ├── OfficeSupply_Calculator</div>
+            <div class="dim">│   └── Labs, midterm, final …</div>
+            <div>└── CIS-223 · Advanced C++</div>
+            <div class="dim">&nbsp;&nbsp;&nbsp;&nbsp;├── Encryption · WordIndex</div>
+            <div class="dim">&nbsp;&nbsp;&nbsp;&nbsp;├── SortableVector · Min-Max templates</div>
+            <div class="dim">&nbsp;&nbsp;&nbsp;&nbsp;└── Classes · Exceptions · Files</div>
+          </div>
+          <div class="body">
+            <span class="tag hot">C++</span><span class="tag" data-lang="en">Coursework</span><span class="tag" data-lang="es">Cursos</span>
+            <h3>C++ Coursework</h3>
+            <p data-lang="en">Two semesters of C++ programs, from input validation and loops to classes, templates, exception handling, file I/O and encryption — including small apps like a coffee-shop order system and a fitness tracker.</p>
+            <p data-lang="es">Dos semestres de programas en C++, desde validación de entrada y ciclos hasta clases, templates, manejo de excepciones, archivos y cifrado — incluyendo apps como un sistema de pedidos de cafetería y un tracker de ejercicio.</p>
+            <div class="stack mono"><span>C++</span><span>Classes</span><span>Templates</span><span>Exceptions</span><span>File I/O</span></div>
+            <div class="links-row"><a href="https://github.com/LilianaPT/CIS-Coursework" target="_blank" rel="noopener"><span data-lang="en">View code</span><span data-lang="es">Ver código</span> ↗</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><span class="num mono">03</span><h2><span data-lang="en">Skills</span><span data-lang="es">Habilidades</span></h2></div>
+      <div class="skills">
+        <div class="skill"><h4 data-lang="en">Languages</h4><h4 data-lang="es">Lenguajes</h4><ul><li>C++</li><li>Python</li><li>C#</li><li>HTML · CSS · JavaScript</li></ul></div>
+        <div class="skill"><h4>Backend &amp; Infra</h4><ul><li>FastAPI · REST APIs</li><li>Docker · Docker Compose</li><li>Linux VMs</li><li>Git · GitHub</li></ul></div>
+        <div class="skill"><h4 data-lang="en">Security &amp; AI</h4><h4 data-lang="es">Seguridad e IA</h4><ul><li data-lang="en">Bot / anomaly detection</li><li data-lang="es">Detección de bots y anomalías</li><li data-lang="en">Logging &amp; observability</li><li data-lang="es">Logs y observabilidad</li><li data-lang="en">Biometric data protection</li><li data-lang="es">Protección de datos biométricos</li></ul></div>
+        <div class="skill"><h4 data-lang="en">Game Dev</h4><h4 data-lang="es">Videojuegos</h4><ul><li>Unity 6</li><li data-lang="en">2D level &amp; puzzle design</li><li data-lang="es">Diseño de niveles y puzles 2D</li><li>WebGL · itch.io</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="wrap">
+      <div class="sec-head"><span class="num mono">04</span><h2><span data-lang="en">Journey</span><span data-lang="es">Trayectoria</span></h2></div>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="when mono">2026</div>
+          <h4 data-lang="en">First game jam — Spooky 2D Jam</h4><h4 data-lang="es">Primera game jam — Spooky 2D Jam</h4>
+          <p data-lang="en">Designed, programmed and shipped “What Comes Back Isn't the Same” in 48 hours.</p>
+          <p data-lang="es">Diseñé, programé y publiqué “What Comes Back Isn't the Same” en 48 horas.</p>
+        </div>
+        <div class="t-item">
+          <div class="when mono">2026</div>
+          <h4>WomenCISO · Cybersecurity &amp; AI for the Talent of the Future</h4>
+          <p data-lang="en">Completed the program and certificate, building Biometric Ghost-Gate as the team project.</p>
+          <p data-lang="es">Completé el programa y obtuve el certificado, desarrollando Biometric Ghost-Gate como proyecto de equipo.</p>
+        </div>
+        <div class="t-item">
+          <div class="when mono">2025 – 2027</div>
+          <h4 data-lang="en">Motorola Solutions support · ECC Foundation</h4><h4 data-lang="es">Apoyo de Motorola Solutions · ECC Foundation</h4>
+          <p data-lang="en">Motorola scholarship (2025) and Motorola Solutions Grant for the 2026–2027 school year.</p>
+          <p data-lang="es">Beca Motorola (2025) y Motorola Solutions Grant para el año escolar 2026–2027.</p>
+        </div>
+        <div class="t-item">
+          <div class="when mono">ECC</div>
+          <h4 data-lang="en">Phi Theta Kappa Honor Society</h4><h4 data-lang="es">Sociedad de honor Phi Theta Kappa</h4>
+          <p data-lang="en">Inducted while studying full-time and working on campus.</p>
+          <p data-lang="es">Inducida mientras estudio tiempo completo y trabajo en el campus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2 data-lang="en">Let's build something secure.</h2>
+      <h2 data-lang="es">Construyamos algo seguro.</h2>
+      <p data-lang="en">I'm looking for internships in software, IT and security. The best way to reach me is LinkedIn.</p>
+      <p data-lang="es">Busco prácticas profesionales en software, TI y seguridad. La mejor forma de contactarme es por LinkedIn.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://www.linkedin.com/in/liliana-pantoja" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/LilianaPT" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://katsuna96.itch.io" target="_blank" rel="noopener">itch.io ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="mono">© 2026 Liliana Pantoja Tinajero</footer>
+
+<script>
+  function setLang(l){
+    document.body.classList.toggle('es', l === 'es');
+    document.documentElement.lang = l;
+    document.getElementById('btn-en').classList.toggle('on', l === 'en');
+    document.getElementById('btn-es').classList.toggle('on', l === 'es');
+    try { localStorage.setItem('lang', l); } catch(e) {}
+  }
+  try { var saved = localStorage.getItem('lang'); if (saved) setLang(saved); } catch(e) {}
+</script>
+</body>
+</html>
